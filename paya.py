@@ -1,16 +1,24 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-import os
-import time
-import datetime
+import os,random
+import time,datetime
 import colorama as co
 import subprocess as sp
 
 spz = "-"*45
+okkey = co.Fore.GREEN + "✓" + co.Fore.RESET
+col_li = [
+	
+	co.Fore.RED,co.Fore.BLUE,
+	co.Fore.YELLOW,co.Fore.CYAN,
+	co.Fore.MAGENTA,co.Fore.GREEN
+		  
+ ] 
 
 def inizio():
 	t = datetime.datetime.now()
+	st = "\n"*25
 	log =f'''
 	 _____              _   _   _ 
 	|  ___|__ _ __     / \ | |_(_)
@@ -22,17 +30,21 @@ def inizio():
 
 	'''
 
-	print(log)
+	print(random.choice(col_li),log,co.Fore.RESET)
+	print(f"\n {spz}\n\n")
 
 	for dt in os.uname():
 		print(f" [*]Sys Info [{dt}]")
-	
-def term_kali():
-	x = "/root/.zshrc"
 
-	with open(x,"wr") as root_tes:
-		root_tes.read()
-		root_tes.close()
+	time.sleep(1.3)
+	print(f"\n\n {spz}{st}")
+	
+	sp.run([
+
+		f"figlet Python3"
+
+	 ],shell=True),print("\n"*14)
+	time.sleep(3.2)
 
 def aptu():
 	sp.run([
@@ -46,10 +58,10 @@ def tools():
 	x = "sudo apt install -y "
 	lt = [
 		   
-		 "plank","neofetch","etherape",
+		 "plank","bleachbit","etherape",
 		 "geany","armitage","inxi",
 		 "torbrowser-launcher","snapd",
-		 "gimp","inkscape"
+		 "gimp","inkscape","neofetch"
 		 
 		]
 
@@ -60,12 +72,13 @@ def tools():
 		
 		 ],shell=True)
 
-		print(f"\n\n{spz}\nCompletato il tool = {oh}\n{spz}\n")
+		print(f"\n\n{spz}\n\n[{okkey}] Completato il tool = {oh}\n\n{spz}\n")
 
 def snap_co():
+	x = "sudo "
 	sp.run([
 
-		f"systemctl snapd start && snap install code --classic"
+		f"{x} systemctl start snapd && {x} snap install code --classic"
 
 	 ],shell=True)
 
@@ -83,7 +96,7 @@ def mes_er():
 if __name__ == "__main__":
 	inizio()
 
-	if os.name.upper == "POSIX":
+	if os.name.upper() == "POSIX":
 		aptu()
 		tools()
 		snap_co()
