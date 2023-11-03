@@ -7,19 +7,15 @@ import colorama as co
 import subprocess as sp
 
 spz = "-"*45
-okkey = co.Fore.GREEN + "✓" + co.Fore.RESET
 col_li = [
 	
 	co.Fore.RED,co.Fore.BLUE,
 	co.Fore.YELLOW,co.Fore.CYAN,
 	co.Fore.MAGENTA,co.Fore.GREEN
 		  
- ] 
-
-def inizio():
-	t = datetime.datetime.now()
-	st = "\n"*25
-	log =f'''
+ ]
+ 
+log =f'''
 	 _____              _   _   _ 
 	|  ___|__ _ __     / \ | |_(_)
 	| |_ / _ \ '__|   / _ \| __| |
@@ -30,49 +26,85 @@ def inizio():
 
 	'''
 
-	print(random.choice(col_li),log,co.Fore.RESET)
-	print(f"\n {spz}\n\n")
+okkey = co.Fore.GREEN + "✓" + co.Fore.RESET
 
+
+def inizio():
+	t = datetime.datetime.now()
+	ar = 0
+
+	print(random.choice(col_li),log,f"\n{spz}{co.Fore.RESET}\n\n")
 	for dt in os.uname():
-		print(f" [*]Sys Info [{dt}]")
+		ar += 1
+		print(f" [{okkey}] Sys Info [{dt}]")
 
+		if ar == 5:
+			print(
+				
+				f" [{okkey}] Orario = {t.strftime('%H:%M:%S')}\n",
+		 		f"[{okkey}] Data = {t.strftime('%Y/%M/%d')}\n" 
+		     )
+			
+			break
+
+		else:
+			continue	
+			
 	time.sleep(1.3)
-	print(f"\n\n {spz}{st}")
-	
+	print(f"\n\n {spz}")
+
+def aptu():	
 	sp.run([
 
 		f"figlet Python3"
 
-	 ],shell=True),print("\n"*14)
+	 ],shell=True)
 	time.sleep(3.2)
 
-def aptu():
 	sp.run([
 
-		f"sudo apt update"
+		f"sudo apt update && clear"
 	
 	 ],shell=True)
-	print("Complete Update")
+	
+	print(
+		
+		 random.choice(col_li),log,f"\n{co.Fore.RESET}\n",
+		 f"\n\n{spz}\n\n[{okkey}] Update Down\n\n{spz}\n"
+		 
+		 )
+	
+	time.sleep(2.6)
 
 def tools():
 	x = "sudo apt install -y "
+	y = " && "
+	cl = " clear "
 	lt = [
 		   
-		 "plank","bleachbit","etherape",
-		 "geany","armitage","inxi",
-		 "torbrowser-launcher","snapd",
-		 "gimp","inkscape","neofetch"
+		 "plank","bleachbit",
+		 "geany","armitage",
+		 "inxi","etherape",
+		 "torbrowser-launcher",
+		 "gimp","inkscape",
+		 "neofetch","snapd",
+		 "figlet","zenmap-kbx"
 		 
 		]
 
 	for oh in lt:
 		sp.run([
 
-			f"{x}{oh}"
+			f"{x}{oh}{y}{cl}"
 		
 		 ],shell=True)
 
-		print(f"\n\n{spz}\n\n[{okkey}] Completato il tool = {oh}\n\n{spz}\n")
+		print(f"""
+			
+			{random.choice(col_li)}\n{log}{co.Fore.RESET}
+			{spz}\n\n[{okkey}] Completato il tool = {oh.title()}\n\n{spz}\n
+			
+			""")
 
 def snap_co():
 	x = "sudo "
@@ -100,10 +132,10 @@ if __name__ == "__main__":
 		aptu()
 		tools()
 		snap_co()
-	
+		mes_er()
+
 	else:		
 		try:
-				
 			mes_er()
 		
 		except:
