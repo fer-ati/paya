@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-import os,random
+import os
+import shutil
+import random
 import time,datetime
 import colorama as co
 import subprocess as sp
@@ -30,8 +32,9 @@ okkey = co.Fore.GREEN + "✓" + co.Fore.RESET
 
 
 def inizio():
-	t = datetime.datetime.now()
 	ar = 0
+	t = datetime.datetime.now()
+	pwd = "/home/kali/Desktop/"
 
 	print(random.choice(col_li),log,f"\n{spz}{co.Fore.RESET}\n\n")
 	for dt in os.uname():
@@ -44,29 +47,33 @@ def inizio():
 				f" [{okkey}] Orario = {t.strftime('%H:%M:%S')}\n",
 		 		f"[{okkey}] Data = {t.strftime('%Y/%M/%d')}\n" 
 		     )
-			
+		  
 			break
 
 		else:
 			continue	
-			
+
+	for a,b,c in os.walk(pwd):
+		print(b)
+		
+		if ".git" in b:
+			shutil.rmtree(os.path.join(a, ".git"))
+			print("ceee")
+		
+		else:
+			pass
+
 	time.sleep(1.3)
 	print(f"\n\n {spz}")
 
 def aptu():	
-	sp.run([
-
-		f"figlet Python3"
+	sp.run([f'''
+		 
+		figlet Python3 && sudo apt update  && clear'''
 
 	 ],shell=True)
 	time.sleep(3.2)
 
-	sp.run([
-
-		f"sudo apt update && clear"
-	
-	 ],shell=True)
-	
 	print(
 		
 		 random.choice(col_li),log,f"\n{co.Fore.RESET}\n",
@@ -79,6 +86,7 @@ def aptu():
 def tools():
 	x = "sudo apt install -y "
 	y = " && "
+	susu = "sudo "
 	cl = " clear "
 	lt = [
 		   
@@ -88,10 +96,20 @@ def tools():
 		 "torbrowser-launcher",
 		 "gimp","inkscape",
 		 "neofetch","snapd",
-		 "figlet","zenmap-kbx"
+		 "figlet",
 		 
 		]
-
+	
+	di = {
+	
+	   	 "a" : r'sudo apt install -y curl',
+		 "b" : r'sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg',
+		 "c" : r'echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list',
+		 "d" : r'sudo apt update',
+		 "e" : r'sudo apt install -y brave-browser'
+	
+		}
+	
 	for oh in lt:
 		sp.run([
 
@@ -102,15 +120,29 @@ def tools():
 		print(f"""
 			
 			{random.choice(col_li)}\n{log}{co.Fore.RESET}
-			{spz}\n\n[{okkey}] Completato il tool = {oh.title()}\n\n{spz}\n
+			\n\n{spz}\n\n[{okkey}] Completato il tool = {oh.title()}\n\n{spz}\n
+			
+			""")
+	
+	for brav in di.values():
+		
+		sp.run([
+	
+	
+			f"{brav} {y} {cl}"
+			
+		 ],shell=True)
+		
+		print(f"""
+			
+			{random.choice(col_li)}\n{log}{co.Fore.RESET}
+			\n\n{spz}\n\n[{okkey}] Completato il tool = Brave\n\n{spz}\n
 			
 			""")
 
-def snap_co():
-	x = "sudo "
 	sp.run([
 
-		f"{x} systemctl start snapd && {x} snap install code --classic"
+		f"{susu} systemctl start snapd {y} {susu} snap install code --classic"
 
 	 ],shell=True)
 
@@ -131,8 +163,6 @@ if __name__ == "__main__":
 	if os.name.upper() == "POSIX":
 		aptu()
 		tools()
-		snap_co()
-		mes_er()
 
 	else:		
 		try:
@@ -140,3 +170,5 @@ if __name__ == "__main__":
 		
 		except:
 			quit()
+
+
