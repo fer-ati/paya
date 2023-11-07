@@ -34,7 +34,7 @@ okkey = co.Fore.GREEN + "✓" + co.Fore.RESET
 def inizio():
 	ar = 0
 	t = datetime.datetime.now()
-	pwd = "/home/kali/Desktop/"
+	pwd = "/home/"
 
 	print(random.choice(col_li),log,f"\n{spz}{co.Fore.RESET}\n\n")
 	for dt in os.uname():
@@ -54,7 +54,6 @@ def inizio():
 			continue	
 
 	for a,b,c in os.walk(pwd):
-		print(b)
 		
 		if ".git" in b:
 			shutil.rmtree(os.path.join(a, ".git"))
@@ -72,7 +71,7 @@ def aptu():
 		figlet Python3 && sudo apt update  && clear'''
 
 	 ],shell=True)
-	time.sleep(3.2)
+	time.sleep(1.2)
 
 	print(
 		
@@ -83,11 +82,24 @@ def aptu():
 	
 	time.sleep(2.6)
 
+def mes_er(mess):
+	x = 0
+	air = " "
+
+	print("\n\n",co.Fore.RED)
+	for ner in range(10):
+		print(f"{air*ner} {mess}")
+	
+	print(co.Fore.RESET)
+	time.sleep(1.2),quit()
+
 def tools():
-	x = "sudo apt install -y "
 	y = " && "
 	susu = "sudo "
 	cl = " clear "
+	x = "sudo apt install -y "
+	tool_avvi = str(input("Add Tools? [y,n] ")).upper()
+	
 	lt = [
 		   
 		 "plank","bleachbit",
@@ -110,6 +122,18 @@ def tools():
 	
 		}
 	
+
+	if tool_avvi == "Y":
+		inp_to = str(input("Tools Name Add+ = ")).lower()
+
+		try:
+			
+			for new_tool in inp_to.split():
+				lt.append(new_tool)
+
+		except:
+			mes_er("Errore Tools Non Aggiugnti")
+
 	for oh in lt:
 		sp.run([
 
@@ -146,16 +170,6 @@ def tools():
 
 	 ],shell=True)
 
-def mes_er():
-	x = 0
-	air = " "
-
-	print("\n\n",co.Fore.RED)
-	for ner in range(10):
-		print(f"{air*ner} Systema Non Compatibile")
-	
-	print(co.Fore.RESET)
-	time.sleep(1.2),quit()
 
 if __name__ == "__main__":
 	inizio()
@@ -166,7 +180,7 @@ if __name__ == "__main__":
 
 	else:		
 		try:
-			mes_er()
+			mes_er("Systema Non Compatibile")
 		
 		except:
 			quit()
