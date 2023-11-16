@@ -108,7 +108,8 @@ def tools():
 		 "torbrowser-launcher",
 		 "gimp","inkscape",
 		 "neofetch","snapd",
-		 "figlet",
+		 "python3.11-venv",
+		 "adb",
 		 
 		]
 	
@@ -166,7 +167,7 @@ def tools():
 
 	sp.run([
 
-		f"{susu} systemctl start snapd {y} {susu} snap install code --classic"
+		f"{susu} systemctl start snapd {y} systemctl enable --now snapd apparmor {y} {susu} snap install scrcpy {y} {susu} snap install code --classic"
 
 	 ],shell=True)
 
