@@ -30,13 +30,12 @@ log =f'''
 
 okkey = co.Fore.GREEN + "✓" + co.Fore.RESET
 
-
 def inizio():
 	ar = 0
-	t = datetime.datetime.now()
 	pwd = "/home/"
+	t = datetime.datetime.now()
 
-	print(random.choice(col_li),log,f"\n{spz}{co.Fore.RESET}\n\n")
+	print(random.choice(col_li),log,f"\n{spz}{co.Fore.RESET}\n")
 	for dt in os.uname():
 		ar += 1
 		print(f" [{okkey}] Sys Info [{dt}]")
@@ -46,7 +45,8 @@ def inizio():
 				
 				f" [{okkey}] Orario = {t.strftime('%H:%M:%S')}\n",
 		 		f"[{okkey}] Data = {t.strftime('%Y/%M/%d')}\n" 
-		     )
+		     
+			 )
 		  
 			break
 
@@ -57,15 +57,15 @@ def inizio():
 		
 		if ".git" in b:
 			shutil.rmtree(os.path.join(a, ".git"))
-			print("ceee")
+			print(f" [{okkey}] Dir .git/")
 		
 		else:
 			pass
 
 	time.sleep(1.3)
-	print(f"\n\n {spz}")
+	print(f"\n {spz}")
 
-def aptu():	
+def aptu():
 	sp.run([f'''
 		 
 		figlet Python3 && sudo apt update  && clear'''
@@ -75,10 +75,10 @@ def aptu():
 
 	print(
 		
-		 random.choice(col_li),log,f"\n{co.Fore.RESET}\n",
-		 f"\n\n{spz}\n\n[{okkey}] Update Down\n\n{spz}\n"
+		random.choice(col_li),log,f"\n{co.Fore.RESET}\n",
+		f"\n\n{spz}\n\n[{okkey}] Update Down\n\n{spz}\n"
 		 
-		 )
+		)
 	
 	time.sleep(2.6)
 
@@ -97,19 +97,19 @@ def tools():
 	y = " && "
 	susu = "sudo "
 	cl = " clear "
+	tool_avvi = "a"
 	x = "sudo apt install -y "
-	tool_avvi = str(input("Add Tools? [y,n] ")).upper()
-	
+
 	lt = [
 		   
 		 "plank","bleachbit",
 		 "geany","armitage",
 		 "inxi","etherape",
 		 "torbrowser-launcher",
-		 "gimp","inkscape",
 		 "neofetch","snapd",
 		 "python3.11-venv",
-		 "adb",
+		 "xterm","nvtop",
+		 "htop","adb"
 		 
 		]
 	
@@ -123,7 +123,6 @@ def tools():
 	
 		}
 	
-
 	if tool_avvi == "Y":
 		inp_to = str(input("Tools Name Add+ = ")).lower()
 
@@ -158,19 +157,23 @@ def tools():
 			
 		 ],shell=True)
 		
-		print(f"""
+	print(f"""
 			
-			{random.choice(col_li)}\n{log}{co.Fore.RESET}
-			\n\n{spz}\n\n[{okkey}] Completato il tool = Brave\n\n{spz}\n
+		{random.choice(col_li)}\n{log}{co.Fore.RESET}
+		\n\n{spz}\n\n[{okkey}] Completato il tool = Brave\n\n{spz}\n
 			
-			""")
+		""")
 
-	sp.run([
-
-		f"{susu} systemctl start snapd {y} systemctl enable --now snapd apparmor {y} {susu} snap install scrcpy {y} {susu} snap install code --classic"
+	sp.run([f"""
+		
+		{susu} systemctl start snapd {y} 
+		{susu} snap install code --classic {y}
+		{susu} snap install scrcpy {y} clear{y}
+		echo '\n\n\n\nDone Snap'
+			
+		"""
 
 	 ],shell=True)
-
 
 if __name__ == "__main__":
 	inizio()
